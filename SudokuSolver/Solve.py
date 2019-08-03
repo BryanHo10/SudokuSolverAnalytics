@@ -91,7 +91,6 @@ def grab_puzzle(file_num):
     f = open(f'Sudoku Puzzles/sudoku({file_num}).csv', "r")
     puzzle_string = f.read().split(',')
     puzzle = [ int(val) for val in puzzle_string]
-    print(puzzle)
     f.close()
     print(f"Grabbing puzzle - {file_num}.")
 
@@ -132,8 +131,10 @@ def solve_puzzle():
                     puzzle[i]=table[i].num
                 if(not current.checkError()):
                     global_inc+=1
-                    print(global_inc,extract_board(), grab_puzzle(1))
-                    solutions.append(inProgress[global_inc])
+                    if(len(inProgress) > global_inc):
+                        solutions.append(inProgress[global_inc])
+                    else:
+                        isSolved=True
             else:
                 global_inc-=1
                 solutions[len(solutions)-1].resetValue()
@@ -148,7 +149,16 @@ def extract_board():
     global solutions
     global inProgress
     global global_inc
-    return [ int(cell.num) for cell in solutions]
+    board=[]
+    count = 0
+    for index in range(0,len(puzzle)):
+        if(puzzle[index] == 0):
+            board.append((solutions[count].num))
+            count+=1
+        else:
+            board.append((puzzle[index]))
+        
+    return board
 
 def resetPuzzle():
     global puzzle
@@ -172,8 +182,7 @@ def check_correction(expected,actual):
 
 def run_test_1():
     puzzle_index = random.randint(0, 70000) 
-    print(puzzle_index)
-    grab_puzzle(1)
+    grab_puzzle(puzzle_index)
     
     set_up_grid()
     solve_puzzle()
@@ -183,6 +192,7 @@ def run_test_1():
         print(f"Puzzle {puzzle_index} was solved correctly.")
     else:
         print(f"Puzzle {puzzle_index} wasn't solved. ")
+        
 run_test_1()
 # def run_test_5():
 
