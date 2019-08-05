@@ -1,5 +1,5 @@
-SudokuSolver/Sudoku Puzzles - Solutions/*
-SudokuSolver/Sudoku Puzzles/*
+SudokuSolver - Python/Sudoku Puzzles - Solutions/*
+SudokuSolver - Python/Sudoku Puzzles/*
 *.csv
-SudokuSolver/.vscode/*
-SudokuSolver/__pycache__/*
+SudokuSolver - Python/.vscode/*
+SudokuSolver - Python/__pycache__/*
