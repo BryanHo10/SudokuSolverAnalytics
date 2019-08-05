@@ -1,5 +1,6 @@
 import random 
 import math
+import time
 class Cell:
     def __init__(self, x,y,w,num):
         self.x=x
@@ -85,6 +86,12 @@ puzzle = []
 inProgress = []
 solutions = []
 global_inc = 0
+def grab_puzzle_file(file_name):
+    global puzzle
+    f = open(file_name, "r")
+    puzzle_string = f.read().split(',')
+    puzzle = [ int(val) for val in puzzle_string]
+    f.close()
 
 def grab_puzzle(file_num):
     global puzzle
@@ -180,7 +187,7 @@ def check_correction(expected,actual):
     return True
 
 
-def run_test_1():
+def run_test():
     puzzle_index = random.randint(0, 70000) 
     grab_puzzle(puzzle_index)
     
@@ -190,12 +197,18 @@ def run_test_1():
     actual = grab_puzzle_solution(puzzle_index)
     if(check_correction(expected,actual)):
         print(f"Puzzle {puzzle_index} was solved correctly.")
+        print(actual)
     else:
         print(f"Puzzle {puzzle_index} wasn't solved. ")
-        
-run_test_1()
-# def run_test_5():
 
-# def run_test_10():
-# def run_test_25():
-# def run_test_50():
+def run_test_file(file_name):
+    time_start = time.time()
+    grab_puzzle_file(file_name)
+    set_up_grid()
+    solve_puzzle()
+    expected = extract_board()
+    # print(expected)
+    print(time.time() - time_start)
+
+for i in range(0,10):
+    run_test_file('sudokuTest.csv')
