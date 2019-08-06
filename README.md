@@ -17,6 +17,8 @@ Using Recursive Backtracking against World's Hardest Sudoku, I will compare runt
 ## Results
 Python
 > Over 20 runs with the World's hardest sudoku, this program averages a solving time of 7.04 seconds.
+
 Nodejs
 > Over 20 runs with the World's hardest sudoku, this program averages a solving time of 0.304 seconds.
+
 ![Timesheet](img/Timesheet.png)
