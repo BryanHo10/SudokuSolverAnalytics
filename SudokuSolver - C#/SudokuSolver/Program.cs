@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace SudokuSolver
@@ -100,7 +101,7 @@ namespace SudokuSolver
             int iCol = index % 9;
             var counter = iCol;
             invalid.Clear();
-            while (counter <= Globals.table.Count)
+            while (counter < Globals.tableLength)
             {
                 if (invalid.Contains(Globals.puzzle[counter]) && Globals.puzzle[counter] != 0)
                 {
@@ -132,7 +133,7 @@ namespace SudokuSolver
     }
     class Solve
     {
-        public List<Cell> table = new List<Cell>();
+        public Dictionary<int,Cell> table = new Dictionary<int,Cell>();
         public List<Cell> inProgress = new List<Cell>();
         public List<Cell> solutions = new List<Cell>();
         public void setUpBoard()
@@ -149,6 +150,7 @@ namespace SudokuSolver
                 }
             }
             solutions.Add(inProgress[Globals.global]);
+            Globals.tableLength = table.Count;
         }
         public void solvePuzzle()
         {
@@ -167,7 +169,10 @@ namespace SudokuSolver
                         if (!current.checkError())
                         {
                             Globals.global++;
-                            solutions.Add(inProgress[Globals.global]);
+                            if (inProgress.Count > Globals.global)
+                                solutions.Add(inProgress[Globals.global]);
+                            else
+                                isSolved = true;
                         }
                     }
                     else
@@ -189,19 +194,8 @@ namespace SudokuSolver
         {
             solutions.Clear();
             inProgress.Clear();
+            Globals.puzzle.Clear();
             Globals.global = 0;
-            for (var y = 0; y < 9; y++)
-            {
-                for (var x = 0; x < 9; x++)
-                {
-                    table[y * 9 + x] = new Cell(x, y, Globals.puzzle[y * 9 + x]);
-                    if (table[y * 9 + x].unSolved)
-                    {
-                        inProgress.Add(table[y * 9 + x]);
-                    }
-                }
-            }
-            solutions.Add(inProgress[Globals.global]);
         }
         public void retrieveIndexedPuzzle(int file_num)
         {
@@ -247,7 +241,22 @@ namespace SudokuSolver
 
         static void Main(string[] args)
         {
-            retrievePuzzleFromFile("sudokuTest.csv");
+
+            for(int i=0; i<10;i++)
+            {
+                Stopwatch stopWatch = new Stopwatch();
+                
+                Solve sudokuSolver = new Solve();
+                stopWatch.Start();
+                sudokuSolver.retrievePuzzleFromFile("sudokuTest.csv");
+                sudokuSolver.setUpBoard();
+                sudokuSolver.solvePuzzle();
+                stopWatch.Stop();
+                Console.WriteLine(stopWatch.Elapsed);
+                sudokuSolver.resetSwitch();
+                
+            }
+            
         }
     }
 }
