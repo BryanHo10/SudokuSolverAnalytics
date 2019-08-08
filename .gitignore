@@ -3,3 +3,6 @@ SudokuSolver - Python/Sudoku Puzzles/*
 *.csv
 SudokuSolver - Python/.vscode/*
 SudokuSolver - Python/__pycache__/*
+SudokuSolver - C#/.vs/*
+SudokuSolver - C#/SudokuSolver/bin/*
+SudokuSolver - C#/SudokuSolver/obj/*

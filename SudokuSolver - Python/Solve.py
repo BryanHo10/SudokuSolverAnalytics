@@ -176,7 +176,6 @@ def resetPuzzle():
     solutions = []
     inProgress = []
     global_inc = 0
-    set_up_grid()
 
 def check_correction(expected,actual):
     for i in range(0,len(actual)):
@@ -206,9 +205,10 @@ def run_test_file(file_name):
     grab_puzzle_file(file_name)
     set_up_grid()
     solve_puzzle()
-    expected = extract_board()
+    # expected = extract_board()
     # print(expected)
     print(time.time() - time_start)
+    resetPuzzle()
 
 for i in range(0,10):
     run_test_file('sudokuTest.csv')

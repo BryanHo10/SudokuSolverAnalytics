@@ -140,20 +140,10 @@ function solvePuzzle(){
     
 }
 
-function resetSwitch(r){
+function resetSwitch(){
     solutions=[];
     inProgress=[];
-    global=0;
-    for(var y=0;y<9;y++){
-        for(var x=0;x<9;x++){
-            table[y*9+x]=new Cell(x,y,puzzle[y*9+x]);
-            if(table[y*9+x].unSolved){
-                inProgress.push(table[y*9+x]);
-            }
-        }
-    }
-    solutions.push(inProgress[global]);
-  
+    global=0; 
 }
 
 function retrieveIndexedPuzzle(file_num)
@@ -211,9 +201,9 @@ function runTest(filename){
     }
     setupBoard();
     solvePuzzle();
-    let expected = extractBoard();
     let delta = Date.now() - start;
     console.log(delta/1000);
+    resetSwitch();
     // let actual = grab_puzzle_solution(puzzle_index)
     // if(check_correction(expected,actual)):
     //     print(f"Puzzle {puzzle_index} was solved correctly.")

@@ -10,8 +10,8 @@ Using Recursive Backtracking against World's Hardest Sudoku, I will compare runt
 | Languages     | Second(s)     |
 | ------------- |--------------:| 
 | Python        | 7.0486        |
-| Node.js       | 0.1961        |
-| C#            | ...           |
+| Node.js       | 0.2631        |
+| C#            | 1.1775        |
 | C++           | ...           |
 
 ## Results
@@ -19,6 +19,9 @@ Python
 > Over 20 runs with the World's hardest sudoku, this program averages a solving time of 7.04 seconds.
 
 Nodejs
-> Over 20 runs with the World's hardest sudoku, this program averages a solving time of 0.196 seconds.
+> Over 20 runs with the World's hardest sudoku, this program averages a solving time of 0.263 seconds.
+
+C-Sharp
+> Over 20 runs with the World's hardest sudoku, this program averages a solving time of 1.178 seconds.
 
 ![Timesheet](img/Timesheet.png)
